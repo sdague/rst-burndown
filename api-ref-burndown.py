@@ -4,7 +4,7 @@ import collections
 import time
 import glob
 
-TOP = 'api-ref'
+TOP = 'nova/api-ref/source'
 
 counts = collections.OrderedDict()
 counts['needs:method_verification'] = []
