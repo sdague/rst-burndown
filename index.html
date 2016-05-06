@@ -15,11 +15,12 @@ body {
 }
 </style>
 <body>
+  <h1>Nova API Ref Sprint Burndown</h1>
 <script src="http://d3js.org/d3.v3.js"></script>
 <script language="javascript">
-    var margin = {top: 20, right: 20, bottom: 30, left: 50},
-  width = 960 - margin.left - margin.right,
-  height = 500 - margin.top - margin.bottom;
+  var margin = {top: 20, right: 20, bottom: 30, left: 50},
+       width = 960 - margin.left - margin.right,
+       height = 500 - margin.top - margin.bottom;
   var x = d3.time.scale()
       .range([0, width]);
   var y = d3.scale.linear()
@@ -31,7 +32,7 @@ body {
   var yAxis = d3.svg.axis()
       .scale(y)
       .orient("left")
-  //.tickFormat(formatPercent);
+
   var area = d3.svg.area()
       .x(function(d) { return x(d.date); })
       .y0(function(d) { return y(d.y0); })
@@ -88,4 +89,7 @@ body {
           .call(yAxis);
   });
 </script>
+
+This is some text
+
 </body>
