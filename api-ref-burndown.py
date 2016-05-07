@@ -34,7 +34,7 @@ with open("data.csv", "a") as f:
         len(counts['needs:body_verification'])))
 
 
-print int(time.time())
+# print int(time.time())
 
-for k, v in counts.items():
-    print "%-30s %3s" % (k, len(v))
+# for k, v in counts.items():
+#     print "%-30s %3s" % (k, len(v))
