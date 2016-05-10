@@ -3,8 +3,8 @@
 set -e
 
 cd $(dirname $0)
-cd nova
-git pull
-cd ..
+pushd nova
+git pull > /dev/null
+popd
 ./api-ref-burndown.py
-git ci -m "Updated csv"
+git ci -m "Updated csv" > /dev/null
