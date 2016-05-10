@@ -11,7 +11,7 @@ counts['needs:method_verification'] = []
 counts['needs:parameter_verification'] = []
 counts['needs:example_verification'] = []
 counts['needs:body_verification'] = []
-# counts['done'] = []
+counts['done'] = []
 
 for fname in glob.glob("%s/*.inc" % TOP):
 # current_file = os.path.join(TOP, fname)
