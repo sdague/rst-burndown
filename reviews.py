@@ -129,21 +129,22 @@ def main():
     data = fetch_data(args.debug)
 
     if args.show_stats:
-        print("\nHas proposed changes")
+        print("\nHas proposed changes: %s" %
+              len(proposed_changes(data).keys()))
         for name in sorted(proposed_changes(data).keys()):
             print(" - " + name)
 
-        print("\nHas had changes merged")
+        print("\nHas had changes merged: %s" % len(merged(data).keys()))
         for name in sorted(merged(data).keys()):
             print(" - " + name)
 
-        print("\nHas reviewed changes")
+        print("\nHas reviewed changes: %s" % len(reviewers(data).keys()))
         for name in sorted(reviewers(data).keys()):
             print(" - " + name)
 
     if args.show_reviews:
-        print("\nOpen reviews changing files")
         reviews_with_files = open_reviews_with_files(data)
+        print("\nOpen reviews changing files: %s" % len(reviews_with_files))
         for name in sorted(reviews_with_files.keys()):
             print(" - https://review.openstack.org/%s - %s" % (
                 name, ", ".join(reviews_with_files[name])))
