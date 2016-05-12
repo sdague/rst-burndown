@@ -22,7 +22,7 @@ import requests
 from requests.auth import HTTPDigestAuth
 
 PROJECT_SITE = "https://review.openstack.org/changes/"
-QUERY = "q=project:openstack/nova+file:api-ref+NOT+age:3d"
+QUERY = "q=project:openstack/nova+file:api-ref+NOT+age:5d"
 ATTRS = ("&o=CURRENT_REVISION&o=ALL_COMMITS&o=ALL_FILES&o=LABELS"
          "&o=DETAILED_LABELS&o=DETAILED_ACCOUNTS")
 URL = "%s?%s%s" % (PROJECT_SITE, QUERY, ATTRS)
