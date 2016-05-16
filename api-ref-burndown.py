@@ -3,27 +3,35 @@
 import collections
 import time
 import glob
+import os
 
 TOP = 'nova/api-ref/source'
 
+PHASES = ['needs:method_verification', 'needs:parameter_verification',
+          'needs:example_verification', 'needs:body_verification']
+
 counts = collections.OrderedDict()
-counts['needs:method_verification'] = []
-counts['needs:parameter_verification'] = []
-counts['needs:example_verification'] = []
-counts['needs:body_verification'] = []
+for phase in PHASES:
+    counts[phase] = []
 counts['done'] = []
 
-for fname in glob.glob("%s/*.inc" % TOP):
-# current_file = os.path.join(TOP, fname)
+files = []
+
+for fname in sorted(glob.glob("%s/*.inc" % TOP)):
     with open(fname) as f:
+        fdata = {'filename': os.path.basename(fname)}
         content = f.readlines()
         done = True
-        for key in counts.keys():
+        for key in PHASES:
             if ".. %s\n" % key in content:
+                fdata[key] = "TODO"
                 done = False
                 counts[key].append(fname)
+            else:
+                fdata[key] = u"\u2713"
         if done:
             counts['done'].append(fname)
+        files.append(fdata)
 
 with open("data.csv", "a") as f:
     f.write("%d,%d,%d,%d,%d\n" % (
@@ -34,7 +42,12 @@ with open("data.csv", "a") as f:
         len(counts['needs:body_verification'])))
 
 
-# print int(time.time())
-
-# for k, v in counts.items():
-#     print "%-30s %3s" % (k, len(v))
+with open("data.txt", "w") as f:
+    FORMAT = "%-40s %10s %10s %10s %10s\n"
+    f.write(FORMAT % ("File Name", "Method", "Param", "Example", "Body"))
+    for fdata in files:
+        f.write((FORMAT % (fdata['filename'],
+                           fdata['needs:method_verification'],
+                           fdata['needs:parameter_verification'],
+                           fdata['needs:example_verification'],
+                           fdata['needs:body_verification'])).encode('utf8'))
