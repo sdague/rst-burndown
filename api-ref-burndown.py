@@ -57,7 +57,6 @@ def fetch_data(url, debug=False):
     user = config.get('default', 'user')
     password = config.get('default', 'password')
     auth = HTTPDigestAuth(user, password)
-    print "Fetching url %s" % url
     resp = requests.get(url, auth=auth)
     return _parse_content(resp, debug)
 
@@ -70,8 +69,6 @@ def _http_process(change):
         m = re.match('--- a/api-ref/source/(.*.inc)$', line)
         if m:
             fname = m.group(1)
-            # print fname
-        # print line
         m = re.match('-.. needs:(.*)', line)
         if m:
             tag = {'number': change['number'],
@@ -137,6 +134,9 @@ with open("data.csv", "a") as f:
         len(counts['needs:example_verification']),
         len(counts['needs:body_verification'])))
 
+
+with open("data.json", "w") as f:
+    f.write(json.dumps(files))
 
 with open("data.txt", "w") as f:
     FORMAT = "%-40s %10s %10s %10s %10s\n"
