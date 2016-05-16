@@ -129,13 +129,13 @@ relevant = gather_reviews()
 update_review_list(files, relevant)
 
 
-# with open("data.csv", "a") as f:
-#     f.write("%d,%d,%d,%d,%d\n" % (
-#         int(time.time()),
-#         len(counts['needs:method_verification']),
-#         len(counts['needs:parameter_verification']),
-#         len(counts['needs:example_verification']),
-#         len(counts['needs:body_verification'])))
+with open("data.csv", "a") as f:
+    f.write("%d,%d,%d,%d,%d\n" % (
+        int(time.time()),
+        len(counts['needs:method_verification']),
+        len(counts['needs:parameter_verification']),
+        len(counts['needs:example_verification']),
+        len(counts['needs:body_verification'])))
 
 
 with open("data.txt", "w") as f:
